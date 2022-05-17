@@ -11,37 +11,73 @@ il software dice quanti e quali dei numeri da indovinare sono stati individuati.
 const divEl = document.getElementById('numeri');
 // selezione elemento che conterra il timer di 30 secondi
 const divTimerEl = document.getElementById('timer');
+// selezione elemento risultato
+const risultato = document.getElementById('risultato');
+// selezione elemento punti
+const punteggio = document.getElementById('punti');
+// selezione elemento numeri stampati su schermo
+const numeriGenerati = document.getElementById('richiesti');
 
 
-// variabile che determina i secondi
-const timer = 30;
 
-//stampare a schermo i 5 numeri generati randomicamente per 5 secondi(con una funzione)
+//stampare a schermo i 5 numeri generati randomicamente per 5 secondi
 const arrayRandNum = getUniqueArray();
 for(let i = 0; i < arrayRandNum.length; i++){
     let itemArray = arrayRandNum[i];
     divEl.innerHTML += itemArray + " ";
 }
-
-let showNumTime = setTimeout(
+// far scomparire i numeri e far apparire un timer di 30 secondi
+// variabile che determina i secondi del timer
+const dalay5 = setInterval(
     () => {
+        clearInterval(dalay5);
         divEl.innerHTML = "";
+
+        let secondi = 5;
+
+        const timer = setInterval(
+            function(){
+                divTimerEl.innerHTML = secondi;
+                if(secondi === 0){
+                    clearInterval(timer);
+                } else {
+                    secondi--;
+                }
+                
+            }
+            
+        , 1000);
+        const programma = setInterval(
+            () => {
+                clearInterval(programma);
+                // far apparire un prompt per inserire i 5 numeri dall'utente
+                const arrayUserNum = [];
+                let punti = 0;
+                risultato.innerHTML = "i numeri inseriti sono: "; 
+                for(let i = 0; i < 5; i++){
+                    let inputUser = parseInt(prompt("inserisci un nuumero"));
+                    //confrontare i numeri generati dalla funzione con i numeri inseriti dall'utente
+                    if(arrayRandNum.includes(inputUser) && !arrayUserNum.includes(inputUser)){
+                        arrayUserNum.push(inputUser);
+                        punti++;
+                        //stampare i quanti/quali numeri ha indovinato l'utente
+                        risultato.innerHTML += inputUser + " ";
+                    }
+                }
+                numeriGenerati.innerHTML = "i numeri da indovinare erano: " + arrayRandNum;
+                punteggio.innerHTML = "hai indovinato: " + punti + " numeri";
+                    
+            }
+        
+        , 7000)
     }
 , 5000);
-// far scomparire i numeri e far apparire un timer di 30 secondi
 
-// far apparire un prompt per inserire i 5 numeri dall'utente
-
-//confrontare i numeri generati dalla funzione con i numeri inseriti dall'utente
-
-//stampare i quanti/quali numeri ha indovinato l'utente
-
-
-
+console.log(arrayRandNum);
 
 // funzione generatore di numeri randomici
 function getRandomNum() {
-    let randomNum = Math.floor(Math.random() * (10 + 1)) + 1;
+    let randomNum = Math.floor(Math.random() * 10) + 1;
     return randomNum;
 }
 
@@ -57,3 +93,8 @@ function getUniqueArray() {
     }
     return array;
 }
+
+
+
+
+
