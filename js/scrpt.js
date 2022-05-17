@@ -17,7 +17,17 @@ const divTimerEl = document.getElementById('timer');
 const timer = 30;
 
 //stampare a schermo i 5 numeri generati randomicamente per 5 secondi(con una funzione)
+const arrayRandNum = getUniqueArray();
+for(let i = 0; i < arrayRandNum.length; i++){
+    let itemArray = arrayRandNum[i];
+    divEl.innerHTML += itemArray + " ";
+}
 
+let showNumTime = setTimeout(
+    () => {
+        divEl.innerHTML = "";
+    }
+, 5000);
 // far scomparire i numeri e far apparire un timer di 30 secondi
 
 // far apparire un prompt per inserire i 5 numeri dall'utente
