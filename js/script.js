@@ -33,7 +33,7 @@ const dalay5 = setInterval(
         clearInterval(dalay5);
         divEl.innerHTML = "";
 
-        let secondi = 5;
+        let secondi = 30;
 
         const timer = setInterval(
             function(){
@@ -69,7 +69,7 @@ const dalay5 = setInterval(
                     
             }
         
-        , 7000)
+        , 37000)
     }
 , 5000);
 
@@ -93,4 +93,3 @@ function getUniqueArray() {
     }
     return array;
 }
-
